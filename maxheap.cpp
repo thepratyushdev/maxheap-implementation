@@ -10,6 +10,7 @@ class maxheap{
         size=0;
         total_size=n;
     }
+    
     void insert(int value){
         if(size==total_size){
             cout<<"overflow cant add "<<value<<"\n"<<"your list is\n";
@@ -28,13 +29,45 @@ class maxheap{
             for(int i=0;i<size;i++){
                 cout<<arr[i]<<" ";
             }
+            cout<<endl;
+    }
+    void heapify(int index){
+        int largest=index;
+        int left=2*index+1;
+        int right=2*index+2;
+        if(left<size&&arr[left]>arr[largest])
+        largest=left;
+        if(right<size&&arr[right]>arr[largest])
+        largest=right;
+        if(largest!=index){
+            swap(arr[largest],arr[index]);
+            heapify(largest);
         }
+    }
+    void Delete(){
+        if(size==0){
+            cout<<"heap underflow\n";
+            return ;
+        }
+        arr[0]=arr[size-1];
+        size--;
+        if(size==0)
+        return;
+        heapify(0);
+    }
+        
+        
 };
 int main(){
     maxheap h1(5);
     h1.insert(8);
     h1.insert(5);
     h1.insert(9);
+    h1.print();
+    h1.Delete();
+    h1.Delete();
+    h1.Delete();
+    h1.Delete();
     h1.insert(2);
     h1.insert(10);
     h1.insert(4);
